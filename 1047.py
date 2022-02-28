@@ -1,13 +1,13 @@
 n , m = map(int, input().split(" "))
+item = {}
 
-item = []
 for i in range(n):
-    item.append(input())
+    item[int(input())] = i
 
 
 for i in range(m):
 
     try:
-        print(item.index(input()))
+        print(item[int(input())])
     except:
         print("-1")
