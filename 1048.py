@@ -11,7 +11,7 @@ for i in range(0,n,1):
 
 ans = item[0]
 
-for i in range(0,n,1):
+for i in range(1,n,1):
     for j in range(i,n,1):
         s = item_sum[j] - item_sum[i - 1]
         if(s > ans):
