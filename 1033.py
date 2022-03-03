@@ -16,22 +16,14 @@ for i in range(n):
         temp = (pow(x[i] - x[j],2) + pow(y[i] - y[j],2)) ** 0.5
         if (temp < ans):
             ans = temp
-            ansx.clear
-            ansy.clear
+            ansx.clear()
+            ansy.clear()
             ansx.append(x[i])
             ansx.append(x[j])
             ansy.append(y[i])
             ansy.append(y[j])
 
-if(ansx[0] < ansx[1]):
-    print(ansx[0], ansy[0])
-    print(ansx[1], ansy[1])
-elif(ansx[0] > ansx[1]):
-    print(ansx[1], ansy[1])
-    print(ansx[0], ansy[0])
-elif(ansy[0] < ansy[1]):
-    print(ansx[0], ansy[0])
-    print(ansx[1], ansy[1])
-elif(ansy[0] > ansy[1]):
-    print(ansx[1], ansy[1])
-    print(ansx[0], ansy[0])
+ANS = sorted([[ansx[0],ansy[0]],[ansx[1],ansy[1]]])
+
+for i in ANS:
+    print(i[0], i[1])
