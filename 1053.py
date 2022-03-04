@@ -7,42 +7,40 @@ for i in range(h):
     for j in range(w):
         maze[i][j] = temp[j]
 
-now_h ,now_w = [0,0]
-ans = 0
+queue = [[0,0]]
+past = []
+ans = [0]
 
 while(True):
-    if(now_h == h - 1 and now_w == w - 1):
+
+    if([h - 1,w - 1] in queue):
+        print(ans[queue.index([h - 1,w - 1])])
         break
-
-    if(now_w + 1 < w):
-        if(maze[now_h][now_w + 1] == "."):
-            now_w += 1
-            ans += 1
-            continue
-
-    if(now_h + 1 < h):
-        if(maze[now_h + 1][now_w] == "."):
-            now_h += 1
-            ans += 1
-            continue
     
-    if(now_w - 1 > 0):
-        if(maze[now_h][now_w - 1] == "."):
-            now_w -= 1
-            ans += 1
-            continue
+    now_h = queue[0][0]
+    now_w = queue[0][1]
+    t_ans = ans[0]
 
-    if(now_h - 1 > 0):
-        if(maze[now_h - 1][now_w] == "."):
-            now_h -= 1
-            ans += 1
-            continue
+    # 判斷往右
+    if (now_w + 1 < w and not([now_h,now_w + 1] in past) and maze[now_h][now_w + 1] == "." ):
+        queue.append([now_h,now_w + 1])
+        ans.append(t_ans + 1)
+    
+    # 判斷往下
+    if (now_h + 1 < h and not([now_h + 1,now_w] in past) and maze[now_h + 1][now_w] == "." ):
+        queue.append([now_h + 1,now_w])
+        ans.append(t_ans + 1)
 
-print(ans)
+    # 判斷往上
+    if (now_h - 1 >= 0 and not([now_h - 1,now_w] in past) and maze[now_h - 1][now_w] == "." ):
+        queue.append([now_h - 1,now_w])
+        ans.append(t_ans + 1)
 
+    # 判斷往左
+    if (now_w - 1 >= 0 and not([now_h,now_w - 1] in past) and maze[now_h][now_w - 1] == "." ):
+        queue.append([now_h,now_w - 1])
+        ans.append(t_ans + 1)
 
-# 4 3
-# ...
-# #.#
-# #.#
-# #..
+    past.append([now_h,now_w])
+    queue.pop(0)
+    ans.pop(0)
